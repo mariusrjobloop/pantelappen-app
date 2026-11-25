@@ -1,0 +1,175 @@
+@import 'tailwindcss';
+
+/*
+ * Pantebanken: leken grønn + gul (inspirert av «giftful»), rosa som aksent.
+ * Alle tekstpar er målt mot WCAG: tekst ≥ 4,5:1 (de fleste ≥ 7:1), UI-elementer ≥ 3:1.
+ */
+:root {
+  --c-bg: #f8f5f0; /* varm off-white */
+  --c-surface: #ffffff;
+  --c-surface-muted: #efebe4;
+  --c-ink: #102414; /* 15:1 mot bg */
+  --c-ink-muted: #4a5a4e; /* 7,3:1 mot surface, ≥ 5,5:1 på alle fliser */
+  --c-border: #7a887e; /* 3,7:1 mot surface */
+
+  /* Knapper og lenker: dyp grønn */
+  --c-primary: #0b3b12; /* hvit tekst: 12,7:1 */
+  --c-primary-hover: #145a20;
+  --c-on-primary: #ffffff;
+
+  /* Merkefarge: knallgrønn flate med mørkegrønn tekst (7,6:1) */
+  --c-brand: #74e05f;
+  --c-on-brand: #0b3b12;
+  --c-on-brand-muted: #1e5a26; /* 4,9:1 */
+  --c-brand-action-icon: #b9f5a9; /* ikon i runde knapper: 10:1 */
+
+  /* Fliser og ikonbrikker */
+  --c-tile-yellow: #ffe94d;
+  --c-tile-pink: #fbd3f6;
+  --c-chip-yellow: #ffe94d;
+  --c-chip-pink: #f06beb;
+  --c-chip-green: #74e05f;
+  --c-on-chip: #102414; /* ≥ 6:1 på alle brikker */
+
+  --c-positive: #11702f; /* 6,2:1 */
+  --c-negative: #a3261b; /* 7,4:1 mot surface, 5,5:1 på rosa flis */
+  --c-on-negative: #ffffff;
+  --c-focus: #1d4ed8; /* ≥ 4:1 mot surface, gul og grønn */
+
+  /* Graf (validert med dataviz/validate_palette.js: CVD ΔE 14,2, normalsyn ΔE 17,5, ≥ 3:1 mot surface) */
+  --c-chart-accent: #0a6640;
+  --c-chart-muted: #77877f;
+  --c-chart-grid: #e6e2da;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: #0d130f;
+    --c-surface: #17201a;
+    --c-surface-muted: #212c24;
+    --c-ink: #eef5ef;
+    --c-ink-muted: #b6c4b9; /* ≥ 7:1 på alle mørke fliser */
+    --c-border: #6f8276;
+
+    --c-primary: #74e05f;
+    --c-primary-hover: #95ea84;
+    --c-on-primary: #0b3b12;
+
+    /* Merkefargen er lik i begge temaer – den lyser fint mot mørk bakgrunn */
+    --c-brand: #74e05f;
+    --c-on-brand: #0b3b12;
+    --c-on-brand-muted: #1e5a26;
+    --c-brand-action-icon: #b9f5a9;
+
+    /* Mørke, fargetonede fliser i stedet for knallsterke pastellflater */
+    --c-tile-yellow: #35300e;
+    --c-tile-pink: #3a1836;
+    --c-chip-yellow: #ffe94d;
+    --c-chip-pink: #f06beb;
+    --c-chip-green: #74e05f;
+    --c-on-chip: #102414;
+
+    --c-positive: #74e05f;
+    --c-negative: #ff9b8f;
+    --c-on-negative: #1a0705;
+    --c-focus: #8ab4ff;
+
+    /* Egne mørke trinn, ikke automatisk invertert (CVD ΔE 13,7, normalsyn ΔE 16,7, ≥ 3:1) */
+    --c-chart-accent: #3caa79;
+    --c-chart-muted: #5f7068;
+    --c-chart-grid: #26332b;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-surface-muted: var(--c-surface-muted);
+  --color-ink: var(--c-ink);
+  --color-ink-muted: var(--c-ink-muted);
+  --color-border: var(--c-border);
+  --color-primary: var(--c-primary);
+  --color-primary-hover: var(--c-primary-hover);
+  --color-on-primary: var(--c-on-primary);
+  --color-brand: var(--c-brand);
+  --color-on-brand: var(--c-on-brand);
+  --color-on-brand-muted: var(--c-on-brand-muted);
+  --color-brand-action-icon: var(--c-brand-action-icon);
+  --color-tile-yellow: var(--c-tile-yellow);
+  --color-tile-pink: var(--c-tile-pink);
+  --color-chip-yellow: var(--c-chip-yellow);
+  --color-chip-pink: var(--c-chip-pink);
+  --color-chip-green: var(--c-chip-green);
+  --color-on-chip: var(--c-on-chip);
+  --color-positive: var(--c-positive);
+  --color-negative: var(--c-negative);
+  --color-on-negative: var(--c-on-negative);
+  --color-focus: var(--c-focus);
+  --color-chart-accent: var(--c-chart-accent);
+  --color-chart-muted: var(--c-chart-muted);
+  --color-chart-grid: var(--c-chart-grid);
+}
+
+@theme {
+  /* Figtree: rund og lettlest brødtekst. Bricolage Grotesque: leken og kraftig til overskrifter og beløp. */
+  --font-sans: 'Figtree Variable', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', 'Figtree Variable', system-ui, sans-serif;
+
+  /* Store tekster: grunnskrift 18 px, saldo 48–64 px. Alt i rem, så det skalerer med zoom. */
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.6;
+  --text-display: 3.25rem;
+  --text-display--line-height: 1;
+  --text-display-lg: 4.5rem;
+  --text-display-lg--line-height: 1;
+  /* Saldo: skalerer med skjermbredden, så «2 520,50 kr» får plass på en 360 px mobil */
+  --text-hero: clamp(2.5rem, 12vw, 4.5rem);
+  --text-hero--line-height: 1;
+
+  /* Minste klikkflate etter WCAG 2.5.5 */
+  --spacing-tap: 2.75rem;
+
+  --radius-tile: 1.75rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    /* Lar innebygde kontroller (datovelger, rullefelt) følge lyst/mørkt tema */
+    color-scheme: light dark;
+  }
+
+  body {
+    @apply bg-bg font-sans text-base text-ink antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  /* Tydelig fokusring for tastaturbrukere */
+  :focus-visible {
+    outline: 3px solid var(--c-focus);
+    outline-offset: 3px;
+    border-radius: 0.375rem;
+  }
+
+  /* På den grønne flaten blir blått for svakt i mørkt tema: bruk mørkegrønn ring (7,6:1) */
+  .brand-scope :focus-visible {
+    outline-color: var(--c-on-brand);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

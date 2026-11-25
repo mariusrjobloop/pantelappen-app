@@ -1,0 +1,25 @@
+export const authText = {
+  formHeading: 'Admin-innlogging',
+  email: 'E-post',
+  password: 'Passord',
+  submit: 'Logg inn',
+  submitting: 'Logger inn …',
+  signOut: 'Logg ut',
+  errorTitle: 'Innloggingen feilet',
+  invalidCredentials: 'Feil e-post eller passord.',
+  rateLimited: 'For mange forsøk. Vent litt og prøv igjen.',
+  missingFields: 'Fyll inn både e-post og passord.',
+  genericError: 'Klarte ikke å logge inn. Sjekk nettforbindelsen og prøv igjen.',
+  emailNotConfirmed:
+    'E-postadressen er ikke bekreftet. I Supabase: Authentication → Users → velg brukeren → «Confirm email» (eller opprett den på nytt med «Auto Confirm User»).',
+  recheck: 'Sjekk tilgang på nytt',
+  rechecking: 'Sjekker …',
+  adminCheckFailed: 'Klarte ikke å sjekke tilgangen mot databasen.',
+  userIdLabel: 'Bruker-ID (til admins-tabellen)',
+  checking: 'Sjekker innlogging …',
+  signedInAs: (email: string) => `Du er logget inn som ${email}.`,
+  adminYes: 'Du har skrivetilgang og kan registrere pant og utgifter.',
+  adminNo:
+    'Denne brukeren har ikke skrivetilgang. Legg den til i admins-tabellen i Supabase (se README, punkt 5).',
+  goToRegister: 'Gå til registrering',
+} as const
